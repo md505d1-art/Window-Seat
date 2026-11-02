@@ -1,19 +1,19 @@
-# Window Seat
+# Little Borough
 
-An offline-first pocket entertainment app for any in-between moment. Build a short mix of interactive fiction, puzzles and pass-and-play games, then keep it ready on your device.
+A cheerful, offline-first town tycoon about making a home for a cast of small-town neighbors. Build little businesses, collect town tips, decorate the neighborhood and meet people as they go about their day.
 
-## Run it
+## Play
 
-Open `index.html` in a browser for the interactive prototype. For installability and offline caching, serve the folder over HTTPS or localhost. The service worker caches the core app shell after the first visit.
+Open `index.html` in a browser. For app installation and offline caching, serve the folder over HTTPS or localhost and add Little Borough to your phone's home screen.
 
-## What's here
+## The prototype
 
-- Mood-based discovery and time-sized experiences
-- A mix builder that fits a selection into the time available
-- Branching micro-fiction, simple puzzles and pass-the-phone prompts
-- Saved offline shelf with local browser storage
-- Responsive desktop and mobile navigation
-- PWA manifest and service worker for offline app-shell use
+- One animated neighborhood with original illustrated buildings and residents
+- Tap-to-visit shops and say hello to neighbors
+- Buildable businesses and decorations, with costs and town income
+- Daily goals, town tips, level progress and a local save
+- Day/night toggle, responsive phone layout and reduced-motion support
+- PWA manifest and service worker for offline play after first load
 
-The story/game library is bundled sample content. Downloads currently mark experiences as saved locally; this prototype does not fetch remote content or require an account.
+Game progress is stored in the browser on the device. No account or network connection is needed after the app shell has loaded.
 
