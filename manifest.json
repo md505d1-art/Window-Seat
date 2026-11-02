@@ -1,12 +1,14 @@
 {
-  "name": "Window Seat — Offline on purpose",
-  "short_name": "Window Seat",
-  "description": "Small stories, clever puzzles and tiny worlds for every offline moment.",
+  "name": "Little Borough — a tiny town tycoon",
+  "short_name": "Little Borough",
+  "description": "Grow a tiny town full of big personalities.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#f4f3ef",
-  "theme_color": "#f4f3ef",
-  "icons": []
+  "background_color": "#f8f5ec",
+  "theme_color": "#f8f5ec",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
 }
 
