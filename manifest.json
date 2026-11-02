@@ -1,0 +1,12 @@
+{
+  "name": "Window Seat — Offline on purpose",
+  "short_name": "Window Seat",
+  "description": "Small stories, clever puzzles and tiny worlds for every offline moment.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f4f3ef",
+  "theme_color": "#f4f3ef",
+  "icons": []
+}
+
