@@ -1,5 +1,5 @@
-const CACHE = 'window-seat-v1';
-const CORE = ['./', './index.html', './manifest.json'];
+const CACHE = 'little-borough-v1';
+const CORE = ['./', './index.html', './manifest.json', './icon.svg'];
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(CORE)));
   self.skipWaiting();
