@@ -94,7 +94,7 @@ export function NewTaskDialog() {
     if (state.open) {
       setTitle(dialogProps.title ?? '')
       setProjectId(dialogProps.projectId ?? '')
-      setDue('')
+      setDue(dialogProps.dueDate ?? '')
       setPriority('medium')
       setModule(dialogProps.module ?? (dialogProps.projectId ? 'spark' : 'general'))
     }

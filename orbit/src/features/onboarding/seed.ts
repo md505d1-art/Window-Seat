@@ -187,7 +187,7 @@ export async function seedDemoData(backend: Backend, ws: { flip: boolean; spark:
       name: 'Reselling brainstorm',
       project_id: resell.id,
       data: {
-        viewport: { x: 40, y: 40, zoom: 0.9 },
+        viewport: null,
         nodes: [
           { id: 'n1', type: 'sticky', position: { x: 0, y: 0 }, data: { text: 'Where do I find stock?', color: 'yellow' } },
           { id: 'n2', type: 'sticky', position: { x: 300, y: -80 }, data: { text: 'Charity shops — weekend loop', color: 'green' } },

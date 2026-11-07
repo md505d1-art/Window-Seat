@@ -9,6 +9,7 @@ export interface DialogProps {
   title?: string
   description?: string
   module?: 'spark' | 'flip' | 'atlas' | 'general'
+  dueDate?: string
 }
 
 interface UIContextValue {
