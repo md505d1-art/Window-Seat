@@ -2,5 +2,5 @@ node_modules
 dist
 .env
 .env.local
-e2e/out
+**/e2e/out/
 *.log
