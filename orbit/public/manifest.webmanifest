@@ -1,0 +1,11 @@
+{
+  "name": "Orbit",
+  "short_name": "Orbit",
+  "description": "Reselling, ideas and travel in one personal workspace.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0B0D12",
+  "theme_color": "#0B0D12",
+  "icons": [{ "src": "orbit.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
+}

@@ -1,0 +1,256 @@
+@import 'tailwindcss';
+@import 'leaflet/dist/leaflet.css';
+@import '@xyflow/react/dist/style.css';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+  Orbit design tokens.
+  Dark is the default look (html.dark); light mode redefines the same tokens.
+  Each workspace has its own accent: Flip emerald, Spark electric violet, Atlas sky.
+*/
+:root {
+  --background: #f6f7f9;
+  --surface: #ffffff;
+  --surface-2: #f0f2f5;
+  --foreground: #0b0d12;
+  --muted-foreground: #556070;
+  --border: #e2e6ec;
+  --input: #d9dee6;
+  --ring: #8b5cf6;
+  --primary: #7c3aed;
+  --primary-fill: #6d28d9;
+  --primary-text: #6d28d9;
+  --destructive-fill: #b91c1c;
+  --primary-foreground: #ffffff;
+  --destructive: #dc2626;
+  --success: #065f46;
+  --warning: #92400e;
+  --flip: #047857;
+  --spark: #7e22ce;
+  --atlas: #0369a1;
+  --flip-fill: #047857;
+  --spark-fill: #7e22ce;
+  --atlas-fill: #0369a1;
+  --flip-text: #065f46;
+  --spark-text: #6b21a8;
+  --atlas-text: #075985;
+  --shadow: 0 1px 2px rgb(15 23 42 / 0.06), 0 8px 24px -12px rgb(15 23 42 / 0.12);
+  color-scheme: light;
+}
+
+.dark {
+  --background: #0b0d12;
+  --surface: #151820;
+  --surface-2: #1c2029;
+  --foreground: #f8fafc;
+  --muted-foreground: #94a3b8;
+  --border: #252a35;
+  --input: #2c3240;
+  --ring: #8b5cf6;
+  --primary: #8b5cf6;
+  --primary-fill: #7c3aed;
+  --primary-text: #a78bfa;
+  --destructive-fill: #b91c1c;
+  --primary-foreground: #ffffff;
+  --destructive: #f87171;
+  --success: #34d399;
+  --warning: #fbbf24;
+  --flip: #10b981;
+  --spark: #a855f7;
+  --atlas: #38bdf8;
+  --flip-fill: #047857;
+  --spark-fill: #7e22ce;
+  --atlas-fill: #0369a1;
+  --flip-text: #34d399;
+  --spark-text: #c084fc;
+  --atlas-text: #7dd3fc;
+  --shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 12px 32px -16px rgb(0 0 0 / 0.6);
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-foreground: var(--foreground);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-destructive: var(--destructive);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-flip: var(--flip);
+  --color-spark: var(--spark);
+  --color-atlas: var(--atlas);
+  --color-flip-text: var(--flip-text);
+  --color-spark-text: var(--spark-text);
+  --color-atlas-text: var(--atlas-text);
+  --font-sans: 'Geist', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'Geist Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+  --shadow-card: var(--shadow);
+  --radius-xl: 0.875rem;
+  --radius-2xl: 1.125rem;
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    font-feature-settings: 'cv11', 'ss01';
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+    letter-spacing: -0.015em;
+  }
+  ::selection {
+    background: color-mix(in oklab, var(--primary) 35%, transparent);
+  }
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+  button,
+  [role='button'] {
+    cursor: pointer;
+  }
+  button:disabled {
+    cursor: not-allowed;
+  }
+}
+
+@utility tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+@utility scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: var(--input) transparent;
+}
+
+/* Module accent helpers: set --accent on a container, then use text-accent / bg-accent. */
+.module-flip {
+  --accent: var(--flip);
+  --accent-fill: var(--flip-fill);
+  --accent-text: var(--flip-text);
+}
+.module-spark {
+  --accent: var(--spark);
+  --accent-fill: var(--spark-fill);
+  --accent-text: var(--spark-text);
+}
+.module-atlas {
+  --accent: var(--atlas);
+  --accent-fill: var(--atlas-fill);
+  --accent-text: var(--atlas-text);
+}
+.module-orbit {
+  --accent: var(--primary);
+  --accent-fill: var(--primary-fill);
+  --accent-text: var(--primary-text);
+}
+@theme inline {
+  --color-accent: var(--accent, var(--primary));
+  --color-accent-fill: var(--accent-fill, var(--primary-fill));
+  --color-accent-text: var(--accent-text, var(--primary-text));
+  --color-primary-fill: var(--primary-fill);
+  --color-primary-text: var(--primary-text);
+  --color-destructive-fill: var(--destructive-fill);
+}
+
+@keyframes orbit-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.animate-in {
+  animation: orbit-fade-in 0.18s ease-out both;
+}
+
+@keyframes orbit-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+.skeleton {
+  background: linear-gradient(90deg, var(--surface-2) 25%, color-mix(in oklab, var(--surface-2) 60%, var(--border)) 50%, var(--surface-2) 75%);
+  background-size: 200% 100%;
+  animation: orbit-shimmer 1.4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Leaflet tweaks to sit inside the Orbit theme */
+.leaflet-container {
+  background: var(--surface-2);
+  font-family: var(--font-sans);
+}
+.dark .leaflet-tile-pane {
+  filter: brightness(0.72) contrast(1.1) saturate(0.7) hue-rotate(185deg) invert(1);
+}
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+  background: var(--surface);
+  color: var(--foreground);
+  border-radius: 12px;
+}
+.leaflet-control-attribution {
+  background: color-mix(in oklab, var(--surface) 88%, transparent) !important;
+  color: var(--foreground);
+}
+.leaflet-control-attribution a {
+  color: var(--foreground) !important;
+  text-decoration: underline;
+}
+.orbit-pin {
+  width: 18px;
+  height: 18px;
+  border-radius: 9999px;
+  border: 3px solid var(--surface);
+  box-shadow: 0 2px 8px rgb(0 0 0 / 0.35);
+}
+
+/* React Flow inside the Orbit theme */
+.react-flow {
+  --xy-background-color: var(--background);
+  --xy-node-background-color: var(--surface);
+  --xy-node-border-color: var(--border);
+  --xy-edge-stroke: var(--muted-foreground);
+  --xy-controls-button-background-color: var(--surface);
+  --xy-controls-button-color: var(--foreground);
+  --xy-controls-button-border-color: var(--border);
+  --xy-minimap-background-color: var(--surface);
+}

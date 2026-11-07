@@ -17,3 +17,7 @@ Open `index.html` in a browser. For app installation and offline caching, serve 
 
 Game progress is stored in the browser on the device. No account or network connection is needed after the app shell has loaded.
 
+## Also in this repository: Orbit
+
+[`orbit/`](orbit/README.md) is a separate app, a personal workspace for reselling (Flip), ideas and projects (Spark) and travel (Atlas). It is built with React, TypeScript and Supabase. The Pages workflow publishes it at `/orbit/` next to Little Borough. Setup and tests are in its README.
+
