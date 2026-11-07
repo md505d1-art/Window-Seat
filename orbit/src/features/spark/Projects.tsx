@@ -73,14 +73,17 @@ export function ProjectsPage() {
             const d = daysUntil(p.due_date)
             const trip = trips.data?.find((t) => t.id === p.linked_trip_id)
             return (
-              <Link key={p.id} to={`/spark/projects/${p.id}`} className="group flex flex-col rounded-2xl border border-border bg-surface p-4 shadow-card transition-colors hover:border-input">
-                <div className="flex items-start gap-3">
+              <div key={p.id} className="relative">
+              <div className="absolute top-3 right-3 z-10">
+                <FavouriteButton on={p.favourite} onToggle={() => update.mutate({ id: p.id, patch: { favourite: !p.favourite } })} label={p.name} />
+              </div>
+              <Link to={`/spark/projects/${p.id}`} className="group flex h-full flex-col rounded-2xl border border-border bg-surface p-4 shadow-card transition-colors hover:border-input">
+                <div className="flex items-start gap-3 pr-8">
                   <span className="mt-1 size-2.5 shrink-0 rounded-full" style={{ background: PROJECT_COLORS[p.color] ?? PROJECT_COLORS.violet }} />
                   <div className="min-w-0 flex-1">
                     <h3 className="truncate font-medium group-hover:underline">{p.name}</h3>
                     <p className="mt-0.5 line-clamp-2 text-sm text-muted-foreground">{p.description || 'No description yet.'}</p>
                   </div>
-                  <FavouriteButton on={p.favourite} onToggle={() => update.mutate({ id: p.id, patch: { favourite: !p.favourite } })} label={p.name} />
                 </div>
                 <div className="mt-4 flex items-center gap-2">
                   <Progress value={s.pct} />
@@ -109,6 +112,7 @@ export function ProjectsPage() {
                 </div>
                 {s.next && <p className="mt-2 truncate text-xs text-muted-foreground">Next milestone: {s.next.title}</p>}
               </Link>
+              </div>
             )
           })}
         </div>

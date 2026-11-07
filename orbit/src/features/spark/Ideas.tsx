@@ -23,14 +23,15 @@ const VIEW_KEY = 'orbit-ideas-view'
 
 function IdeaCard({ idea, onFav }: { idea: SparkIdea; onFav: () => void }) {
   return (
+    <div className="relative h-full">
+    <div className="absolute top-3 right-3 z-10">
+      <FavouriteButton on={idea.favourite} onToggle={onFav} label={idea.title} />
+    </div>
     <Link
       to={`/spark/ideas/${idea.id}`}
-      className="group flex h-full flex-col rounded-2xl border border-border bg-surface p-4 shadow-card transition-colors hover:border-input"
+      className="group flex h-full flex-col rounded-2xl border border-border bg-surface p-4 pr-11 shadow-card transition-colors hover:border-input"
     >
-      <div className="flex items-start justify-between gap-2">
-        <h3 className="text-sm leading-snug font-medium group-hover:underline">{idea.title}</h3>
-        <FavouriteButton on={idea.favourite} onToggle={onFav} label={idea.title} />
-      </div>
+      <h3 className="text-sm leading-snug font-medium group-hover:underline">{idea.title}</h3>
       {idea.description && <p className="mt-1 line-clamp-3 text-sm text-muted-foreground">{idea.description}</p>}
       <div className="mt-auto flex flex-wrap items-center gap-1.5 pt-3">
         <Badge tone={STAGE_META[idea.stage].tone}>{STAGE_META[idea.stage].label}</Badge>
@@ -48,6 +49,7 @@ function IdeaCard({ idea, onFav }: { idea: SparkIdea; onFav: () => void }) {
         <DemoBadge show={idea.is_demo} />
       </div>
     </Link>
+    </div>
   )
 }
 

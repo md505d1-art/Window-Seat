@@ -192,8 +192,8 @@ export function NewProjectDialog() {
     if (state.open) {
       setName(dialogProps.title ?? '')
       setDescription(dialogProps.description ?? '')
-      setKind('general')
-      setTripId('')
+      setKind(dialogProps.tripId ? 'travel' : 'general')
+      setTripId(dialogProps.tripId ?? '')
       setStart('')
       setDue('')
     }

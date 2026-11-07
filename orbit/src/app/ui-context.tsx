@@ -10,6 +10,7 @@ export interface DialogProps {
   description?: string
   module?: 'spark' | 'flip' | 'atlas' | 'general'
   dueDate?: string
+  tripId?: string
 }
 
 interface UIContextValue {
