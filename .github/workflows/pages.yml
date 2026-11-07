@@ -1,4 +1,4 @@
-name: Deploy site (Little Borough + Orbit)
+name: Deploy Orbit
 
 on:
   push:
@@ -28,33 +28,27 @@ jobs:
         with:
           node-version: 22
           cache: npm
-          cache-dependency-path: orbit/package-lock.json
-      - name: Install Orbit dependencies
-        working-directory: orbit
+      - name: Install dependencies
         run: npm ci
-      - name: Test Orbit
-        working-directory: orbit
+      - name: Unit tests
         run: npm test
       - name: Build Orbit
-        working-directory: orbit
         env:
-          ORBIT_BASE: /${{ github.event.repository.name }}/orbit/
+          # Served from https://<owner>.github.io/<repo>/ — works whatever the repository is called.
+          ORBIT_BASE: /${{ github.event.repository.name }}/
+          SITE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/
           # Public Supabase settings (repository variables, not secrets). Leave unset for demo mode.
           VITE_SUPABASE_URL: ${{ vars.VITE_SUPABASE_URL }}
           VITE_SUPABASE_ANON_KEY: ${{ vars.VITE_SUPABASE_ANON_KEY }}
         run: npm run build
-      - name: Assemble site
-        run: |
-          mkdir _site
-          cp -r index.html manifest.json sw.js icon.svg app README.md _site/
-          cp -r orbit/dist _site/orbit
-          cp orbit/deploy/gh-pages-404.html _site/404.html
+      - name: Add Little Borough
+        run: cp -r little-borough dist/little-borough
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Upload site
         uses: actions/upload-pages-artifact@v3
         with:
-          path: _site
+          path: dist
       - name: Publish to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4

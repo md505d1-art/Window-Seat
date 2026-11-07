@@ -4,10 +4,18 @@ import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 import path from 'node:path'
 
-// ORBIT_BASE lets the GitHub Pages build serve Orbit from /<repo>/orbit/.
+// ORBIT_BASE lets the GitHub Pages build serve Orbit from /<repo>/.
 export default defineConfig({
   base: process.env.ORBIT_BASE ?? '/',
-  plugins: [react(), tailwindcss()],
+  plugins: [
+    react(),
+    tailwindcss(),
+    {
+      // Link previews need an absolute image URL; the deploy workflow sets SITE_URL.
+      name: 'orbit-site-url',
+      transformIndexHtml: (html) => html.replaceAll('__SITE_URL__', process.env.SITE_URL ?? ''),
+    },
+  ],
   resolve: { alias: { '@': path.resolve(import.meta.dirname, 'src') } },
   build: {
     chunkSizeWarningLimit: 900,

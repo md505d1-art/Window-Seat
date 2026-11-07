@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <title>Orbit</title>
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="36%" r="78%">
+      <stop offset="0" stop-color="#231a42"/>
+      <stop offset=".55" stop-color="#12141e"/>
+      <stop offset="1" stop-color="#0b0d12"/>
+    </radialGradient>
+    <radialGradient id="planet" cx="36%" cy="30%" r="78%">
+      <stop offset="0" stop-color="#ddd6fe"/>
+      <stop offset=".38" stop-color="#9f7aea"/>
+      <stop offset=".72" stop-color="#7c3aed"/>
+      <stop offset="1" stop-color="#4c1d95"/>
+    </radialGradient>
+    <linearGradient id="ring" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0" stop-color="#f8fafc" stop-opacity=".45"/>
+      <stop offset=".5" stop-color="#f8fafc"/>
+      <stop offset="1" stop-color="#f8fafc" stop-opacity=".45"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#8b5cf6" stop-opacity=".45"/>
+      <stop offset="1" stop-color="#8b5cf6" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="512" height="512" rx="120" fill="url(#bg)"/>
+  <g transform="translate(256 256) scale(1.0) translate(-256 -256)">
+    <circle cx="256" cy="262" r="198" fill="url(#glow)"/>
+    <g transform="translate(256 262) rotate(-24)">
+      <path d="M -188 0 A 188 80 0 0 1 188 0" fill="none" stroke="#e9e5ff" stroke-width="30" stroke-linecap="butt" opacity="1"/>
+      <circle cx="174.3" cy="-30.0" r="28" fill="#38bdf8" stroke="#0e1018" stroke-width="10"/>
+    </g>
+    <circle cx="256" cy="262" r="104" fill="url(#planet)"/>
+    
+    <g transform="translate(256 262) rotate(-24)">
+      <path d="M 188 0 A 188 80 0 0 1 -188 0" fill="none" stroke="#e9e5ff" stroke-width="30" stroke-linecap="butt"/>
+      <circle cx="-176.7" cy="27.4" r="34" fill="#10b981" stroke="#0e1018" stroke-width="10"/><circle cx="115.7" cy="63.0" r="30" fill="#c084fc" stroke="#0e1018" stroke-width="10"/>
+    </g>
+  </g>
+</svg>

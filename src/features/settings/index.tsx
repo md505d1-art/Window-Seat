@@ -183,7 +183,7 @@ export function SettingsPage() {
               You’re using Orbit in demo mode. Everything is stored in this browser’s IndexedDB on this device only. It isn’t backed up or synced, and clearing site data deletes it.
             </p>
             <p className="text-muted-foreground">
-              To use real accounts, create a Supabase project, run the SQL migration in <code className="font-mono text-xs">orbit/supabase/migrations</code>, and set <code className="font-mono text-xs">VITE_SUPABASE_URL</code> and <code className="font-mono text-xs">VITE_SUPABASE_ANON_KEY</code>. The README has the steps.
+              To use real accounts, create a Supabase project, run the SQL migration in <code className="font-mono text-xs">supabase/migrations</code>, and set <code className="font-mono text-xs">VITE_SUPABASE_URL</code> and <code className="font-mono text-xs">VITE_SUPABASE_ANON_KEY</code>. The README has the steps.
             </p>
             <div>
               <Button
