@@ -9,13 +9,13 @@ export const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: 'bg-primary text-primary-foreground shadow-sm hover:brightness-110',
-        accent: 'bg-accent text-white shadow-sm hover:brightness-110',
+        default: 'bg-primary-fill text-primary-foreground shadow-sm hover:brightness-110',
+        accent: 'bg-accent-fill text-white shadow-sm hover:brightness-110',
         secondary: 'bg-surface-2 text-foreground hover:bg-[color-mix(in_oklab,var(--surface-2)_80%,var(--foreground)_8%)]',
         outline: 'border border-border bg-transparent text-foreground hover:bg-surface-2',
         ghost: 'text-foreground hover:bg-surface-2',
-        destructive: 'bg-destructive text-white shadow-sm hover:brightness-110',
-        link: 'h-auto px-0 text-primary underline-offset-4 hover:underline',
+        destructive: 'bg-destructive-fill text-white shadow-sm hover:brightness-110',
+        link: 'h-auto px-0 text-primary-text underline-offset-4 hover:underline',
       },
       size: {
         default: 'h-9 px-3.5',

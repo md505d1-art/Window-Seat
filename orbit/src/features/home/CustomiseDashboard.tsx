@@ -47,7 +47,7 @@ export function CustomiseDashboardDialog() {
   return (
     <Dialog {...state}>
       <DialogContent title="Customise your dashboard" description="Choose which widgets appear on Home and in what order.">
-        <ul className="grid gap-1.5">
+        <ul className="grid grid-cols-1 gap-1.5">
           {list.map((w, i) => {
             const info = WIDGET_INFO[w.id]
             const off = info.module && profile && !profile.workspaces[info.module]

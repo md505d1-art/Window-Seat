@@ -71,7 +71,7 @@ export function Checkbox({ className, ...props }: React.ComponentProps<typeof Ch
   return (
     <CheckboxPrimitive.Root
       className={cn(
-        'peer grid size-4 shrink-0 place-items-center rounded-[5px] border border-input bg-surface transition-colors data-[state=checked]:border-accent data-[state=checked]:bg-accent data-[state=checked]:text-white',
+        'peer grid size-4 shrink-0 place-items-center rounded-[5px] border border-input bg-surface transition-colors data-[state=checked]:border-accent-fill data-[state=checked]:bg-accent-fill data-[state=checked]:text-white',
         className,
       )}
       {...props}
@@ -87,7 +87,7 @@ export function Switch({ className, ...props }: React.ComponentProps<typeof Swit
   return (
     <SwitchPrimitive.Root
       className={cn(
-        'inline-flex h-5 w-9 shrink-0 items-center rounded-full border border-transparent bg-input transition-colors data-[state=checked]:bg-accent',
+        'inline-flex h-5 w-9 shrink-0 items-center rounded-full border border-transparent bg-input transition-colors data-[state=checked]:bg-accent-fill',
         className,
       )}
       {...props}

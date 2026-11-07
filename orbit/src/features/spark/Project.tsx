@@ -270,7 +270,7 @@ function Overview({ project, tasks, milestones }: { project: SparkProject; tasks
         )}
         <Card>
           <CardHeader title="Next milestones" icon={MilestoneIcon} />
-          <ul className="grid gap-1 px-4 pb-4 text-sm">
+          <ul className="grid grid-cols-1 gap-1 px-4 pb-4 text-sm">
             {nextMilestones.length === 0 && <li className="text-muted-foreground">No open milestones.</li>}
             {nextMilestones.map((m) => (
               <li key={m.id} className="flex justify-between gap-2">
@@ -335,7 +335,7 @@ function Overview({ project, tasks, milestones }: { project: SparkProject; tasks
         </Card>
         <Card>
           <CardHeader title="Recent activity" icon={Clock} />
-          <ul className="grid gap-1 px-4 pb-4 text-sm">
+          <ul className="grid grid-cols-1 gap-1 px-4 pb-4 text-sm">
             {recent.length === 0 && <li className="text-muted-foreground">No activity yet.</li>}
             {recent.map((a) => (
               <li key={a.id} className="truncate">
@@ -382,7 +382,7 @@ function TasksTab({ project, tasks, loading, onOpen }: { project: SparkProject; 
   return (
     <div>
       <div className="mb-3 flex items-center justify-between gap-2">
-        <p className="text-xs text-muted-foreground">Drag cards between columns, or focus one and use Space and the arrow keys.</p>
+        <p className="text-xs text-muted-foreground">Drag cards between columns. With a keyboard, focus a card and press Space, move it with the arrow keys, then press Space again. Enter opens it.</p>
         <Segmented
           label="Task view"
           value={view}
@@ -402,6 +402,7 @@ function TasksTab({ project, tasks, loading, onOpen }: { project: SparkProject; 
           positionOf={(t) => t.position}
           onMove={(t, status, position) => actions.move(t, status, position)}
           renderCard={(t) => <TaskCard task={t} onOpen={() => onOpen(t)} />}
+          labelOf={(t) => t.title}
           footer={(status) => <QuickAdd project={project} status={status} />}
         />
       ) : tasks.length === 0 ? (
@@ -493,7 +494,7 @@ function MilestonesTab({ project, milestones, tasks }: { project: SparkProject; 
       {milestones.length === 0 ? (
         <EmptyState icon={Flag} title="No milestones yet" description="Break the project into a few checkpoints. Tasks can be attached to each one." />
       ) : (
-        <ol className="grid gap-2">
+        <ol className="grid grid-cols-1 gap-2">
           {milestones.map((m, i) => {
             const mt = tasks.filter((t) => t.milestone_id === m.id)
             const md = mt.filter((t) => t.status === 'completed').length
@@ -586,7 +587,7 @@ function CalendarTab({ project, tasks, milestones, onOpen }: { project: SparkPro
             return (
               <div key={iso} className={cn('group min-h-24 border-r border-b border-border p-1.5 [&:nth-child(7n)]:border-r-0', !isSameMonth(day, month) && 'bg-background/40')}>
                 <div className="flex items-center justify-between">
-                  <span className={cn('grid size-6 place-items-center rounded-full text-xs tabular', isToday(day) && 'bg-accent font-semibold text-white', !isSameMonth(day, month) && 'text-muted-foreground')}>
+                  <span className={cn('grid size-6 place-items-center rounded-full text-xs tabular', isToday(day) && 'bg-accent-fill font-semibold text-white', !isSameMonth(day, month) && 'text-muted-foreground')}>
                     {format(day, 'd')}
                   </span>
                   <button
@@ -599,7 +600,7 @@ function CalendarTab({ project, tasks, milestones, onOpen }: { project: SparkPro
                 </div>
                 <div className="mt-1 grid gap-1">
                   {dayMs.map((m) => (
-                    <div key={m.id} className="flex items-center gap-1 truncate rounded bg-[color-mix(in_oklab,var(--spark)_16%,transparent)] px-1.5 py-0.5 text-[11px] font-medium text-spark" title={`Milestone: ${m.title}`}>
+                    <div key={m.id} className="flex items-center gap-1 truncate rounded bg-[color-mix(in_oklab,var(--spark)_16%,transparent)] px-1.5 py-0.5 text-[11px] font-medium text-spark-text" title={`Milestone: ${m.title}`}>
                       <Flag className="size-3 shrink-0" /> {m.title}
                     </div>
                   ))}
@@ -642,7 +643,7 @@ function RoadmapTab({ project, milestones, tasks }: { project: SparkProject; mil
           <div className="absolute inset-x-0 top-10 h-1.5 rounded-full bg-surface-2" />
           {today >= startD && today <= endD && (
             <div className="absolute top-6 bottom-12 w-px bg-accent" style={{ left: `${at(today)}%` }}>
-              <span className="absolute -top-5 -translate-x-1/2 text-[10px] font-medium whitespace-nowrap text-accent">Today</span>
+              <span className="absolute -top-5 -translate-x-1/2 text-[10px] font-medium whitespace-nowrap text-accent-text">Today</span>
             </div>
           )}
           {months.map((d) => (
@@ -665,7 +666,7 @@ function RoadmapTab({ project, milestones, tasks }: { project: SparkProject; mil
       </Card>
       <Card>
         <CardHeader title="Phases" description="Milestones in order, with the tasks attached to each" />
-        <ol className="grid gap-3 px-4 pb-4">
+        <ol className="grid grid-cols-1 gap-3 px-4 pb-4">
           {milestones.map((m, i) => {
             const mt = tasks.filter((t) => t.milestone_id === m.id)
             const md = mt.filter((t) => t.status === 'completed').length

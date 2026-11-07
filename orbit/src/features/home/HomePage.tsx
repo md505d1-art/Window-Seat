@@ -267,7 +267,7 @@ function UpcomingTrips() {
                     </p>
                     <p className="truncate text-xs text-muted-foreground">{dateRange(t.start_date, t.end_date)}</p>
                   </div>
-                  <span className="shrink-0 rounded-lg bg-[color-mix(in_oklab,var(--atlas)_14%,transparent)] px-2 py-1 text-xs font-semibold text-atlas tabular">
+                  <span className="shrink-0 rounded-lg bg-[color-mix(in_oklab,var(--atlas)_14%,transparent)] px-2 py-1 text-xs font-semibold text-atlas-text tabular">
                     {d === null ? 'No date' : d <= 0 ? 'Now' : `${d}d`}
                   </span>
                 </div>
@@ -300,16 +300,16 @@ function SavedDestinations() {
   return (
     <WidgetShell module="atlas">
       <CardHeader title="Saved destinations" description={`${want.length} to visit · ${visited} visited`} icon={MapPin} action={<SeeAll to="/atlas/map" label="Map" />} />
-      <ul className="grid gap-0.5 px-2 pb-3">
+      <ul className="grid grid-cols-1 gap-0.5 px-2 pb-3">
         {places.isLoading ? (
-          <Skeleton className="mx-2 h-16" />
+          <li><Skeleton className="mx-2 h-16" /></li>
         ) : want.length === 0 ? (
-          <p className="px-2 text-sm text-muted-foreground">Search for places in Atlas to save them here.</p>
+          <li className="px-2 text-sm text-muted-foreground">Search for places in Atlas to save them here.</li>
         ) : (
           want.slice(0, 5).map((p) => (
             <li key={p.id}>
               <Link to={`/atlas?place=${p.id}`} className="flex items-center gap-2.5 rounded-lg px-2 py-1.5 hover:bg-surface-2">
-                <MapPin className="size-3.5 text-atlas" />
+                <MapPin className="size-3.5 text-atlas-text" />
                 <span className="min-w-0 flex-1 truncate text-sm">{p.name}</span>
                 <span className="truncate text-xs text-muted-foreground">{[p.city, p.country].filter(Boolean).join(', ')}</span>
                 {p.favourite && <Star className="size-3 text-amber-400" fill="currentColor" aria-label="Favourite" />}
@@ -327,11 +327,11 @@ function RecentActivity() {
   return (
     <WidgetShell>
       <CardHeader title="Recent activity" icon={Clock} />
-      <ul className="grid gap-0.5 px-2 pb-3">
+      <ul className="grid grid-cols-1 gap-0.5 px-2 pb-3">
         {activity.isLoading ? (
-          <Skeleton className="mx-2 h-16" />
+          <li><Skeleton className="mx-2 h-16" /></li>
         ) : (activity.data ?? []).length === 0 ? (
-          <p className="px-2 text-sm text-muted-foreground">Your recent changes will appear here.</p>
+          <li className="px-2 text-sm text-muted-foreground">Your recent changes will appear here.</li>
         ) : (
           (activity.data ?? []).map((a) => {
             const body = (
@@ -381,9 +381,9 @@ function Favourites() {
   return (
     <WidgetShell>
       <CardHeader title="Favourites" icon={Star} />
-      <ul className="grid gap-0.5 px-2 pb-3">
+      <ul className="grid grid-cols-1 gap-0.5 px-2 pb-3">
         {list.length === 0 ? (
-          <p className="px-2 text-sm text-muted-foreground">Star anything — items, ideas, trips, places — to pin it here.</p>
+          <li className="px-2 text-sm text-muted-foreground">Star anything — items, ideas, trips, places — to pin it here.</li>
         ) : (
           list.slice(0, 8).map((f) => (
             <li key={f.module + f.id}>

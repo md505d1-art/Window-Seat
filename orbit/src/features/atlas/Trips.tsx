@@ -410,7 +410,7 @@ function DayList({ label, sub, stops, onAdd, onEdit }: { label: string; sub?: st
       ) : (
         <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={onDragEnd}>
           <SortableContext items={sorted.map((s) => s.id)} strategy={verticalListSortingStrategy}>
-            <ol className="grid gap-1.5">
+            <ol className="grid grid-cols-1 gap-1.5">
               {sorted.map((s, i) => (
                 <StopRow key={s.id} stop={s} index={i} count={sorted.length} onEdit={() => onEdit(s)} onMove={(dir) => place(s.id, dir === -1 ? i - 1 : i + 1)} />
               ))}
@@ -493,7 +493,7 @@ function TripPlaces({ trip, stops }: { trip: AtlasTrip; stops: AtlasStop[] }) {
         {shown.length === 0 ? (
           <p className="text-sm text-muted-foreground">
             No places yet. Save places in{' '}
-            <Link className="text-accent underline" to="/atlas">
+            <Link className="text-accent-text underline" to="/atlas">
               Places
             </Link>{' '}
             and add them here.
@@ -579,7 +579,7 @@ function Checklist({ trip }: { trip: AtlasTrip }) {
         )}
       </Card>
       {list.length > 0 && (
-        <ul className="grid gap-1.5">
+        <ul className="grid grid-cols-1 gap-1.5">
           {list.map((it, i) => (
             <li key={it.id} className="flex items-center gap-3 rounded-xl border border-border bg-surface px-3 py-2">
               <Checkbox id={`cl-${it.id}`} checked={it.done} onCheckedChange={(v) => update.mutate({ id: it.id, patch: { done: v === true } })} />
@@ -653,7 +653,7 @@ function Details({ trip }: { trip: AtlasTrip }) {
       <div className="grid content-start gap-4">
         <Card className="grid gap-3 p-4">
           <h2 className="flex items-center gap-2 text-sm font-semibold">
-            <Wallet className="size-4 text-atlas" /> Budget
+            <Wallet className="size-4 text-atlas-text" /> Budget
           </h2>
           <div className="grid grid-cols-[minmax(0,1fr)_96px] gap-2">
             <Field label="Amount" htmlFor="tr-budget">
@@ -675,7 +675,7 @@ function Details({ trip }: { trip: AtlasTrip }) {
         </Card>
         <Card className="module-spark">
           <CardHeader title="Linked Spark projects" icon={Rocket} />
-          <ul className="grid gap-1 px-2 pb-2">
+          <ul className="grid grid-cols-1 gap-1 px-2 pb-2">
             {(projects.data ?? []).map((p) => (
               <li key={p.id}>
                 <Link to={`/spark/projects/${p.id}`} className="block rounded-lg px-2 py-1.5 text-sm hover:bg-surface-2">

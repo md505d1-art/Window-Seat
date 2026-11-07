@@ -47,7 +47,7 @@ export function StatsPage() {
       <div className="mt-4 grid gap-4 lg:grid-cols-2">
         <Card className="module-atlas">
           <CardHeader title="Countries" description={`${countries.size} visited`} icon={Flag} />
-          <ul className="grid gap-2 px-4 pb-4">
+          <ul className="grid grid-cols-1 gap-2 px-4 pb-4">
             {countryList.length === 0 && <li className="text-sm text-muted-foreground">Mark places as visited to see your countries.</li>}
             {countryList.map((c) => (
               <li key={c.name} className="flex items-center gap-3 text-sm">
@@ -82,7 +82,7 @@ export function StatsPage() {
         </Card>
         <Card>
           <CardHeader title="Saved places by category" />
-          <ul className="grid gap-2.5 px-4 pb-4">
+          <ul className="grid grid-cols-1 gap-2.5 px-4 pb-4">
             {PLACE_CATEGORIES.map((c) => {
               const n = p.filter((x) => x.category === c).length
               if (!n) return null

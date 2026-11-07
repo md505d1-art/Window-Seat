@@ -24,7 +24,7 @@ export function NotificationList({ rows, onPick, compact }: { rows: Notification
   const { update } = useTable('notifications')
   const navigate = useNavigate()
   return (
-    <ul className="grid gap-0.5">
+    <ul className="grid grid-cols-1 gap-0.5">
       {rows.map((n) => (
         <li key={n.id}>
           <button
@@ -59,7 +59,7 @@ export function NotificationsMenu() {
         <Button variant="ghost" size="icon-sm" className="relative" aria-label={`Notifications${unread.length ? `, ${unread.length} unread` : ''}`}>
           <Bell />
           {unread.length > 0 && (
-            <span className="absolute top-1 right-1 grid min-w-4 place-items-center rounded-full bg-primary px-1 text-[9px] leading-4 font-bold text-white">
+            <span className="absolute top-1 right-1 grid min-w-4 place-items-center rounded-full bg-primary-fill px-1 text-[9px] leading-4 font-bold text-white">
               {unread.length > 9 ? '9+' : unread.length}
             </span>
           )}

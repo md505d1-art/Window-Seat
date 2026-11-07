@@ -1,4 +1,4 @@
-const CACHE = 'little-borough-v2';
+const CACHE = 'little-borough-v3';
 const CORE = ['./', './index.html', './manifest.json', './icon.svg'];
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(CORE)));
@@ -9,7 +9,9 @@ self.addEventListener('activate', event => {
   self.clients.claim();
 });
 self.addEventListener('fetch', event => {
-  if (event.request.method !== 'GET' || new URL(event.request.url).origin !== self.location.origin) return;
+  const url = new URL(event.request.url);
+  // Orbit (/orbit/) is a separate app with its own caching; never serve it from this cache.
+  if (event.request.method !== 'GET' || url.origin !== self.location.origin || url.pathname.includes('/orbit/')) return;
   event.respondWith(caches.match(event.request).then(cached => cached || fetch(event.request).then(response => {
     if (response.ok) caches.open(CACHE).then(cache => cache.put(event.request, response.clone()));
     return response;

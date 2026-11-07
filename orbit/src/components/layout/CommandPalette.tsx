@@ -3,7 +3,7 @@ import { BookOpen, Lightbulb, ListChecks, Monitor, Moon, Package, Plane, Rocket,
 import * as React from 'react'
 import { useNavigate } from 'react-router'
 import { HOME_NAV, MODULES, TASKS_NAV } from '@/app/nav'
-import { useTheme } from '@/app/theme'
+import { useThemePreference } from '@/app/theme-preference'
 import { useDialogState, useUI } from '@/app/ui-context'
 import { searchDocs, useSearchIndex } from '@/features/shared/search'
 import { useWorkspaces } from '@/features/shared/workspaces'
@@ -17,7 +17,7 @@ export function CommandPalette() {
   const state = useDialogState('palette')
   const { open } = useUI()
   const navigate = useNavigate()
-  const { setTheme } = useTheme()
+  const { set: setTheme } = useThemePreference()
   const ws = useWorkspaces()
   const [query, setQuery] = React.useState('')
   const { docs } = useSearchIndex()

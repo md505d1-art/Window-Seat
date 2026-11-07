@@ -58,7 +58,7 @@ export function MapPage() {
           .sort((a, b) => (a.day ?? '').localeCompare(b.day ?? '') || a.position - b.position)
           .map((s, i) => {
             const p = placeById.get(s.place_id!)!
-            return { id: `stop:${s.id}`, lat: p.lat! + 0.0004, lng: p.lng! + 0.0004, label: `${s.title} (${trips.data?.find((t) => t.id === s.trip_id)?.title ?? 'trip'})`, color: 'var(--spark)', style: 'stop' as const, number: i + 1 }
+            return { id: `stop:${s.id}`, lat: p.lat! + 0.0004, lng: p.lng! + 0.0004, label: `${s.title} (${trips.data?.find((t) => t.id === s.trip_id)?.title ?? 'trip'})`, color: 'var(--spark-fill)', style: 'stop' as const, number: i + 1 }
           })
       : []),
     ...results.filter((r) => !saver.existing(r)).map((r) => ({ id: `search:${r.ref}`, lat: r.lat, lng: r.lng, label: `${r.name} (search result)`, color: '#fff', style: 'search' as const })),
@@ -154,7 +154,7 @@ export function MapPage() {
               <LocateFixed /> Find me
             </Button>
           </div>
-          {dropMode && <p className="text-xs text-accent">Click anywhere on the map to place a pin.</p>}
+          {dropMode && <p className="text-xs text-accent-text">Click anywhere on the map to place a pin.</p>}
           <p className="text-[11px] text-muted-foreground">“Find me” asks for your location once and only when you tap it.</p>
         </div>
       </aside>

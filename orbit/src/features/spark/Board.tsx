@@ -32,6 +32,8 @@ interface BoardProps<T extends { id: string }, C extends string> {
   onMove: (item: T, column: C, position: number) => void
   footer?: (column: C) => React.ReactNode
   label: string
+  /** Name read out to screen readers while a card is moved. */
+  labelOf?: (item: T) => string
 }
 
 function SortableCard({ id, children }: { id: string; children: React.ReactNode }) {
@@ -40,9 +42,18 @@ function SortableCard({ id, children }: { id: string; children: React.ReactNode 
     <div
       ref={setNodeRef}
       style={{ transform: CSS.Translate.toString(transform), transition }}
-      className={cn('touch-manipulation', isDragging && 'opacity-30')}
+      className={cn('touch-manipulation rounded-xl', isDragging && 'opacity-30')}
       {...attributes}
       {...listeners}
+      onKeyDown={(e) => {
+        // Space picks the card up (drag sensor); Enter opens it.
+        if (e.key === 'Enter') {
+          e.preventDefault()
+          ;(e.currentTarget.firstElementChild as HTMLElement | null)?.click()
+          return
+        }
+        listeners?.onKeyDown?.(e)
+      }}
     >
       {children}
     </div>
@@ -72,11 +83,14 @@ function Column<C extends string>({ col, count, children, footer }: { col: Board
  * Drag-and-drop board. Works with mouse, touch and keyboard (focus a card, press Space,
  * move with arrow keys, Space again to drop).
  */
-export function Board<T extends { id: string }, C extends string>({ columns, items, columnOf, positionOf, renderCard, onMove, footer, label }: BoardProps<T, C>) {
+export function Board<T extends { id: string }, C extends string>({ columns, items, columnOf, positionOf, renderCard, onMove, footer, label, labelOf }: BoardProps<T, C>) {
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 6 } }),
     useSensor(TouchSensor, { activationConstraint: { delay: 180, tolerance: 6 } }),
-    useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates }),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+      keyboardCodes: { start: ['Space'], cancel: ['Escape'], end: ['Space'] },
+    }),
   )
   const [activeId, setActiveId] = React.useState<string | null>(null)
   const byCol = React.useMemo(() => {
@@ -118,6 +132,14 @@ export function Board<T extends { id: string }, C extends string>({ columns, ite
   }
 
   const activeItem = activeId ? items.find((i) => i.id === activeId) : undefined
+  const name = (id: string) => {
+    const it = items.find((i) => i.id === id)
+    return it && labelOf ? labelOf(it) : 'Card'
+  }
+  const colName = (id: string) => {
+    const c = findColumn(id)
+    return columns.find((x) => x.id === c)?.label ?? 'a column'
+  }
 
   return (
     <DndContext
@@ -127,7 +149,13 @@ export function Board<T extends { id: string }, C extends string>({ columns, ite
       onDragCancel={() => setActiveId(null)}
       onDragEnd={onDragEnd}
       accessibility={{
-        screenReaderInstructions: { draggable: 'To move a card, press space or enter. Use the arrow keys to move it, then press space or enter to drop it, or escape to cancel.' },
+        screenReaderInstructions: { draggable: 'Press Enter to open this card. To move it, press Space, use the arrow keys, then press Space again to drop it, or Escape to cancel.' },
+        announcements: {
+          onDragStart: ({ active }) => `Picked up ${name(String(active.id))}.`,
+          onDragOver: ({ active, over }) => (over ? `${name(String(active.id))} is over ${colName(String(over.id))}.` : `${name(String(active.id))} is not over a column.`),
+          onDragEnd: ({ active, over }) => (over ? `Dropped ${name(String(active.id))} in ${colName(String(over.id))}.` : `${name(String(active.id))} was put back.`),
+          onDragCancel: ({ active }) => `Cancelled. ${name(String(active.id))} was put back.`,
+        },
       }}
     >
       <div className="-mx-1 flex gap-3 overflow-x-auto px-1 pb-3 scrollbar-thin" role="group" aria-label={label}>

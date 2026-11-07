@@ -138,7 +138,7 @@ export function LoginPage() {
               <Link to="/reset-password" className="text-muted-foreground hover:text-foreground">
                 Forgot password?
               </Link>
-              <Link to="/signup" className="font-medium text-primary">
+              <Link to="/signup" className="font-medium text-primary-text">
                 Create an account
               </Link>
             </div>
@@ -210,7 +210,7 @@ export function SignupPage() {
             </Button>
             <p className="text-center text-sm text-muted-foreground">
               Already have an account?{' '}
-              <Link to="/login" className="font-medium text-primary">
+              <Link to="/login" className="font-medium text-primary-text">
                 Sign in
               </Link>
             </p>
@@ -234,7 +234,7 @@ export function ResetPasswordPage() {
       ) : sent ? (
         <div className="grid gap-4">
           <p className="rounded-xl border border-border bg-surface p-4 text-sm">If an account exists for {email}, a reset link is on its way.</p>
-          <Link to="/login" className="text-sm font-medium text-primary">
+          <Link to="/login" className="text-sm font-medium text-primary-text">
             Back to sign in
           </Link>
         </div>
@@ -286,7 +286,7 @@ export function UpdatePasswordPage() {
       {status !== 'signed-in' ? (
         <p className="text-sm text-muted-foreground">
           This link has expired or was already used.{' '}
-          <Link to="/reset-password" className="font-medium text-primary">
+          <Link to="/reset-password" className="font-medium text-primary-text">
             Request a new one
           </Link>
           .

@@ -40,12 +40,7 @@ export function TaskCard({ task, onOpen, projectName }: { task: SparkTask; onOpe
   const d = daysUntil(task.due_date)
   return (
     <div
-      role="button"
-      tabIndex={-1}
       onClick={onOpen}
-      onKeyDown={(e) => {
-        if (e.key === 'Enter') onOpen?.()
-      }}
       className="cursor-grab rounded-xl border border-border bg-surface p-3 text-left shadow-xs transition-colors hover:border-input active:cursor-grabbing"
     >
       <p className={cn('text-sm leading-snug', task.status === 'completed' && 'text-muted-foreground line-through')}>{task.title}</p>

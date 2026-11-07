@@ -331,7 +331,7 @@ export function JournalPage() {
             return (
               <Card key={t.id || 'none'} className="p-4">
                 <h2 className="mb-3 flex items-center gap-2 text-sm font-semibold">
-                  <Plane className="size-4 text-atlas" /> {t.title}
+                  <Plane className="size-4 text-atlas-text" /> {t.title}
                   <span className="text-xs font-normal text-muted-foreground">
                     {es.length} entr{es.length === 1 ? 'y' : 'ies'}
                   </span>

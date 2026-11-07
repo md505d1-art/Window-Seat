@@ -1,4 +1,4 @@
-name: Deploy Window Seat
+name: Deploy site (Little Borough + Orbit)
 
 on:
   push:
@@ -23,12 +23,38 @@ jobs:
     steps:
       - name: Check out the repository
         uses: actions/checkout@v4
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: orbit/package-lock.json
+      - name: Install Orbit dependencies
+        working-directory: orbit
+        run: npm ci
+      - name: Test Orbit
+        working-directory: orbit
+        run: npm test
+      - name: Build Orbit
+        working-directory: orbit
+        env:
+          ORBIT_BASE: /${{ github.event.repository.name }}/orbit/
+          # Public Supabase settings (repository variables, not secrets). Leave unset for demo mode.
+          VITE_SUPABASE_URL: ${{ vars.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_ANON_KEY: ${{ vars.VITE_SUPABASE_ANON_KEY }}
+        run: npm run build
+      - name: Assemble site
+        run: |
+          mkdir _site
+          cp -r index.html manifest.json sw.js icon.svg app README.md _site/
+          cp -r orbit/dist _site/orbit
+          cp orbit/deploy/gh-pages-404.html _site/404.html
       - name: Configure Pages
         uses: actions/configure-pages@v5
-      - name: Upload app files
+      - name: Upload site
         uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: _site
       - name: Publish to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4

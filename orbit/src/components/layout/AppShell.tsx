@@ -23,7 +23,7 @@ import {
 import * as React from 'react'
 import { Link, NavLink, Outlet, useLocation, useNavigate } from 'react-router'
 import { crumbsFor, HOME_NAV, MODULES, moduleForPath, TASKS_NAV, type NavLeaf } from '@/app/nav'
-import { useTheme } from '@/app/theme'
+import { useApplyAccountTheme, useThemePreference } from '@/app/theme-preference'
 import { useUI } from '@/app/ui-context'
 import { Button } from '@/components/ui/button'
 import { SheetContent } from '@/components/ui/dialog'
@@ -102,7 +102,7 @@ function NavItem({ item, collapsed, accent, onNavigate, badge }: { item: NavLeaf
           <item.icon className="size-4 shrink-0" style={isActive && accent ? { color: accent } : undefined} aria-hidden />
           {!collapsed && <span className="truncate">{item.label}</span>}
           {!collapsed && badge ? (
-            <span className="ml-auto rounded-full bg-primary px-1.5 text-[10px] leading-4 font-semibold text-white">{badge}</span>
+            <span className="ml-auto rounded-full bg-primary-fill px-1.5 text-[10px] leading-4 font-semibold text-white">{badge}</span>
           ) : null}
           {collapsed && badge ? <span className="absolute top-1 right-1 size-2 rounded-full bg-primary" /> : null}
           {collapsed && <span className="sr-only">{item.label}</span>}
@@ -200,7 +200,7 @@ function Brand({ collapsed }: { collapsed: boolean }) {
 }
 
 function ThemeMenu() {
-  const { theme, setTheme, resolved } = useTheme()
+  const { theme, set: setTheme, resolved } = useThemePreference()
   const Icon = resolved === 'dark' ? Moon : Sun
   return (
     <DropdownMenu>
@@ -348,6 +348,7 @@ export function AppShell() {
   const session = useSession()
   const module = moduleForPath(pathname)
   useBackgroundNotifications()
+  useApplyAccountTheme()
 
   React.useEffect(() => {
     try {
@@ -375,7 +376,7 @@ export function AppShell() {
 
   return (
     <div className={cn('flex h-dvh overflow-hidden', `module-${module}`)}>
-      <a href="#orbit-main" className="sr-only z-50 rounded bg-primary px-3 py-2 text-white focus:not-sr-only focus:fixed focus:top-2 focus:left-2">
+      <a href="#orbit-main" className="sr-only z-50 rounded bg-primary-fill px-3 py-2 text-white focus:not-sr-only focus:fixed focus:top-2 focus:left-2">
         Skip to content
       </a>
       <aside

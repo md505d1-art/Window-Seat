@@ -234,7 +234,7 @@ export function PlacesPage() {
             {(collections.data ?? []).length === 0 ? (
               <p className="text-sm text-muted-foreground">Group places into lists like “Food spots” or “Bucket list”.</p>
             ) : (
-              <ul className="grid gap-0.5">
+              <ul className="grid grid-cols-1 gap-0.5">
                 {(collections.data ?? []).map((c) => {
                   const n = (links.data ?? []).filter((l) => l.collection_id === c.id).length
                   return (

@@ -206,7 +206,7 @@ function IdeaEditor({ idea }: { idea: SparkIdea }) {
               {draft.links.map((l, i) => (
                 <li key={l.url + i} className="flex min-w-0 items-center gap-2 text-sm">
                   <Link2 className="size-4 shrink-0 text-muted-foreground" />
-                  <a href={l.url} target="_blank" rel="noreferrer noopener" className="min-w-0 flex-1 truncate text-accent hover:underline">
+                  <a href={l.url} target="_blank" rel="noreferrer noopener" className="min-w-0 flex-1 truncate text-accent-text hover:underline">
                     {l.label || l.url}
                   </a>
                   <ExternalLink className="size-3.5 text-muted-foreground" />
@@ -269,7 +269,7 @@ function IdeaEditor({ idea }: { idea: SparkIdea }) {
           {project.data && (
             <p className="text-xs text-muted-foreground">
               Became the project{' '}
-              <Link className="text-accent underline" to={`/spark/projects/${project.data.id}`}>
+              <Link className="text-accent-text underline" to={`/spark/projects/${project.data.id}`}>
                 {project.data.name}
               </Link>
               .

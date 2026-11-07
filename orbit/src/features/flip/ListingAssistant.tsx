@@ -49,7 +49,7 @@ function RuleChecks({ draft, item, properNouns }: { draft: ListingDraft; item: F
     { ok: draft.price_low === null || draft.price_high === null || draft.price_low <= draft.price_high, label: 'Price range low ≤ high' },
   ]
   return (
-    <ul className="grid gap-1 text-xs">
+    <ul className="grid grid-cols-1 gap-1 text-xs">
       {checks.map((c) => (
         <li key={c.label} className={cn('flex items-center gap-1.5', c.ok ? 'text-success' : 'text-warning')}>
           {c.ok ? <CircleCheck className="size-3.5" /> : <TriangleExclamationPoint className="size-3.5" />}

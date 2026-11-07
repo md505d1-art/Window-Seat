@@ -150,7 +150,7 @@ export function PhotoUploader({
           <button
             type="button"
             onClick={() => input.current?.click()}
-            className="grid aspect-square place-items-center rounded-xl border border-dashed border-input text-muted-foreground transition-colors hover:border-accent hover:text-accent"
+            className="grid aspect-square place-items-center rounded-xl border border-dashed border-input text-muted-foreground transition-colors hover:border-accent hover:text-accent-text"
             disabled={busy}
           >
             <span className="grid justify-items-center gap-1 text-xs">

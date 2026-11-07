@@ -10,10 +10,10 @@ export const badgeVariants = cva(
     variants: {
       tone: {
         neutral: 'bg-surface-2 text-muted-foreground',
-        accent: 'bg-[color-mix(in_oklab,var(--accent,var(--primary))_16%,transparent)] text-accent',
-        flip: 'bg-[color-mix(in_oklab,var(--flip)_16%,transparent)] text-flip',
-        spark: 'bg-[color-mix(in_oklab,var(--spark)_16%,transparent)] text-spark',
-        atlas: 'bg-[color-mix(in_oklab,var(--atlas)_16%,transparent)] text-atlas',
+        accent: 'bg-[color-mix(in_oklab,var(--accent,var(--primary))_16%,transparent)] text-accent-text',
+        flip: 'bg-[color-mix(in_oklab,var(--flip)_16%,transparent)] text-flip-text',
+        spark: 'bg-[color-mix(in_oklab,var(--spark)_16%,transparent)] text-spark-text',
+        atlas: 'bg-[color-mix(in_oklab,var(--atlas)_16%,transparent)] text-atlas-text',
         success: 'bg-[color-mix(in_oklab,var(--success)_16%,transparent)] text-success',
         warning: 'bg-[color-mix(in_oklab,var(--warning)_18%,transparent)] text-warning',
         danger: 'bg-[color-mix(in_oklab,var(--destructive)_16%,transparent)] text-destructive',
@@ -59,7 +59,7 @@ export function CardHeader({
     <div className={cn('flex items-start justify-between gap-3 px-4 pt-4 pb-2', className)}>
       <div className="flex min-w-0 items-center gap-2.5">
         {Icon && (
-          <span className="grid size-7 shrink-0 place-items-center rounded-lg bg-[color-mix(in_oklab,var(--accent,var(--primary))_14%,transparent)] text-accent">
+          <span className="grid size-7 shrink-0 place-items-center rounded-lg bg-[color-mix(in_oklab,var(--accent,var(--primary))_14%,transparent)] text-accent-text">
             <Icon className="size-4" />
           </span>
         )}
@@ -91,12 +91,13 @@ export function Separator({ className }: { className?: string }) {
   return <div role="separator" className={cn('h-px w-full bg-border', className)} />
 }
 
-export function Progress({ value, className }: { value: number; className?: string }) {
+export function Progress({ value, className, label = 'Progress' }: { value: number; className?: string; label?: string }) {
   const v = Math.max(0, Math.min(100, value))
   return (
     <div
       className={cn('h-1.5 w-full overflow-hidden rounded-full bg-surface-2', className)}
       role="progressbar"
+      aria-label={label}
       aria-valuenow={Math.round(v)}
       aria-valuemin={0}
       aria-valuemax={100}
@@ -121,7 +122,7 @@ export function EmptyState({
 }) {
   return (
     <div className={cn('flex flex-col items-center justify-center rounded-2xl border border-dashed border-border px-6 py-12 text-center', className)}>
-      <span className="mb-3 grid size-11 place-items-center rounded-xl bg-[color-mix(in_oklab,var(--accent,var(--primary))_14%,transparent)] text-accent">
+      <span className="mb-3 grid size-11 place-items-center rounded-xl bg-[color-mix(in_oklab,var(--accent,var(--primary))_14%,transparent)] text-accent-text">
         <Icon className="size-5" />
       </span>
       <h3 className="text-sm font-semibold">{title}</h3>
@@ -252,7 +253,7 @@ export function PageHeader({
   return (
     <div className="mb-5 flex flex-wrap items-end justify-between gap-3">
       <div className="min-w-0">
-        {eyebrow && <p className="mb-1 text-xs font-medium tracking-wide text-accent uppercase">{eyebrow}</p>}
+        {eyebrow && <p className="mb-1 text-xs font-medium tracking-wide text-accent-text uppercase">{eyebrow}</p>}
         <h1 className="text-xl font-semibold tracking-tight sm:text-2xl">{title}</h1>
         {description && <p className="mt-1 max-w-2xl text-sm text-muted-foreground">{description}</p>}
       </div>

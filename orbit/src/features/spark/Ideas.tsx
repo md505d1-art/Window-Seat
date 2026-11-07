@@ -270,6 +270,7 @@ export function IdeasPage() {
               columns={IDEA_STAGES.map((s) => ({ id: s, label: STAGE_META[s].label, tone: STAGE_META[s].tone }))}
               items={list}
               columnOf={(i) => i.stage}
+              labelOf={(i) => i.title}
               onMove={(i, s) => {
                 if (s === 'converted' && !i.project_id) {
                   open('new-project', { ideaId: i.id, title: i.title, description: i.description })

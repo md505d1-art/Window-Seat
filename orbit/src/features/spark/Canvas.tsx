@@ -116,7 +116,7 @@ function LinkNode({ data }: NodeProps<Node<LinkData>>) {
     <div className="w-56 rounded-lg border border-border bg-surface p-3 shadow-md">
       {handles}
       <p className="flex items-center gap-1.5 text-sm font-medium text-foreground">
-        <Link2 className="size-3.5 text-spark" /> <span className="truncate">{data.title || host}</span>
+        <Link2 className="size-3.5 text-spark-text" /> <span className="truncate">{data.title || host}</span>
       </p>
       <a href={data.url} target="_blank" rel="noreferrer noopener" className="nodrag mt-1 flex items-center gap-1 truncate text-xs text-muted-foreground hover:text-foreground">
         {host} <ExternalLink className="size-3" />

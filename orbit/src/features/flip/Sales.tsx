@@ -214,7 +214,7 @@ export function SalesPage() {
             <div className="grid content-start gap-4">
               <Card>
                 <CardHeader title="By platform" />
-                <ul className="grid gap-3 px-4 pb-4">
+                <ul className="grid grid-cols-1 gap-3 px-4 pb-4">
                   {byPlatform.length === 0 && <li className="text-sm text-muted-foreground">No sales in this period.</li>}
                   {byPlatform.map(([name, r]) => (
                     <li key={name} className="grid gap-1">
@@ -232,7 +232,7 @@ export function SalesPage() {
               </Card>
               <Card className="module-spark">
                 <CardHeader title="Linked business plans" icon={Rocket} description="Spark projects connected to Flip" />
-                <ul className="grid gap-1 px-2 pb-3">
+                <ul className="grid grid-cols-1 gap-1 px-2 pb-3">
                   {(projects.data ?? []).length === 0 ? (
                     <li className="px-2 text-sm text-muted-foreground">Create a “reselling business plan” project in Spark to link it here.</li>
                   ) : (
