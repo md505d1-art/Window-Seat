@@ -1,4 +1,4 @@
-const CACHE = 'little-borough-v2';
+const CACHE = 'little-borough-v3';
 const CORE = ['./', './index.html', './manifest.json', './icon.svg'];
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(CORE)));

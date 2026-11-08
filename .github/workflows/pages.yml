@@ -1,4 +1,4 @@
-name: Deploy Window Seat
+name: Deploy Orbit
 
 on:
   push:
@@ -23,12 +23,32 @@ jobs:
     steps:
       - name: Check out the repository
         uses: actions/checkout@v4
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Unit tests
+        run: npm test
+      - name: Build Orbit
+        env:
+          # Served from https://<owner>.github.io/<repo>/ — works whatever the repository is called.
+          ORBIT_BASE: /${{ github.event.repository.name }}/
+          SITE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/
+          # Public Supabase settings (repository variables, not secrets). Leave unset for demo mode.
+          VITE_SUPABASE_URL: ${{ vars.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_ANON_KEY: ${{ vars.VITE_SUPABASE_ANON_KEY }}
+        run: npm run build
+      - name: Add Little Borough
+        run: cp -r little-borough dist/little-borough
       - name: Configure Pages
         uses: actions/configure-pages@v5
-      - name: Upload app files
+      - name: Upload site
         uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: dist
       - name: Publish to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
